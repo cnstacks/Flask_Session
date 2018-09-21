@@ -7,6 +7,7 @@
 # Author  : 天晴天朗
 # Email   : tqtl@tqtl.org
 from datetime import timedelta
+from redis import Redis
 
 
 class Config(object):
@@ -16,15 +17,17 @@ class Config(object):
     SECRET_KEY = 'fjdksjfdasljflksd'
     PERMANENT_SESSION_LIFETIME = timedelta(minutes=20)
     SESSION_REFRESH_EACH_REQUEST = True
+    SESSION_TYPE = "redis"
+    #SESSION_REDIS = Redis(host='127.0.0.1',port='6379')
 
 
 class ProductionConfig(Config):
-    pass
+    SESSION_REDIS = Redis(host='127.0.0.1', port='6379')
 
 
 class DevelopmentConfig(Config):
-    pass
+    SESSION_REDIS = Redis(host='127.0.0.1', port='6379')
 
 
 class TestingConfig(Config):
-    pass
+    SESSION_REDIS = Redis(host='127.0.0.1', port='6379')

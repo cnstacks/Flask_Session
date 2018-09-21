@@ -9,6 +9,8 @@
 from flask import Flask
 from .views import account
 from .views import home
+# from flask.ext.session import Session
+from flask_session import Session
 
 
 def create_app():
@@ -16,4 +18,6 @@ def create_app():
     app.config.from_object('settings.DevelopmentConfig')
     app.register_blueprint(account.account)
     app.register_blueprint(home.home)
+    # 将Session替换成Redis;
+    Session(app)
     return app
